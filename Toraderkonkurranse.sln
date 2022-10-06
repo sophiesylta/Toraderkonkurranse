@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toraderkonkurranse.WebAPI", "Toraderkonkurranse.WebAPI\Toraderkonkurranse.WebAPI.csproj", "{AE16FC4B-CD19-404C-8F90-6BAC3286B604}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toraderkonkurranse.Domene", "Toraderkonkurranse.Domene\Toraderkonkurranse.Domene.csproj", "{E2751F3E-E94C-46E1-AA0D-4F9A6E8D267A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE16FC4B-CD19-404C-8F90-6BAC3286B604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE16FC4B-CD19-404C-8F90-6BAC3286B604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE16FC4B-CD19-404C-8F90-6BAC3286B604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE16FC4B-CD19-404C-8F90-6BAC3286B604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2751F3E-E94C-46E1-AA0D-4F9A6E8D267A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2751F3E-E94C-46E1-AA0D-4F9A6E8D267A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2751F3E-E94C-46E1-AA0D-4F9A6E8D267A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2751F3E-E94C-46E1-AA0D-4F9A6E8D267A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2908F344-819D-4297-AFAF-9D0DA6931EE3}
+	EndGlobalSection
+EndGlobal
