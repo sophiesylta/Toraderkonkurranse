@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,27 +23,23 @@ namespace Toraderkonkurranse.Infrastructure.Persistence.Repository
         }
         public Deltaker GetDeltaker(string deltakerNavn)
         {
-            return context.Deltakere.Where(e => e.navn.Equals(deltakerNavn)).FirstOrDefault();
+            return context.Deltakere.Where(e => e.navn.Equals(deltakerNavn)).Include(e=>e.personer).FirstOrDefault();
         }
-        public Person GetPerson(string epost) 
-        {
-            return context.Personer.Where(e => e.epost.Equals(epost)).FirstOrDefault();
-        }
-        public void LeggTilPerson(Person person)
-        {
-            context.Personer.Add(person);
-            context.SaveChanges();
-        }
+       
         public void LeggTilPersonIDeltaker(Person person, string deltakerNavn)
         {
             Deltaker deltaker = context.Deltakere.Where(e => e.navn.Equals(deltakerNavn)).FirstOrDefault();
             deltaker.personer.Add(person);
-            context.Update(deltaker);
+
             context.SaveChanges();
         }
         public List<Deltakelse> GetDeltakelseIKonkurranse(int konkurranseID)
         {
             return context.Deltakelse.Where(e => e.konkurranseID == konkurranseID).ToList();
+        }
+        public Boolean finnesDeltakelseIKonkurranse(int konkurranseID, int deltakerID, int personID)
+        {
+            return context.Deltakelse.Any(e=>e.konkurranseID == konkurranseID&& e.deltakerID== deltakerID && e.personID == personID);
         }
         public List<Deltakelse> GetDeltakelseIArrangement(int arrangementID) 
         {

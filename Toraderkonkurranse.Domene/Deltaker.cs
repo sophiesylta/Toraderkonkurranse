@@ -6,6 +6,11 @@
         {
             personer = new List<Person>();
         }
+        public Deltaker(string navn, List<Person> personer)
+        {
+            this.personer = personer;
+            this.navn = navn;
+        }
         public int deltakerID { get; set; }
         public string navn { get; set; }
         public List<Person> personer { get; set; }

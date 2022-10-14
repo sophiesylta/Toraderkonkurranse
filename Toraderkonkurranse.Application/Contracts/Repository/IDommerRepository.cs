@@ -11,5 +11,6 @@ namespace Toraderkonkurranse.Application.Contracts.Repository
     {
         public List<Konkurranse> getKonkurranseByDommer(int dommerPersonID);
         public List<Deltaker> getDeltakerByKonkurranse(int konkurranseID);
+        public void opprettKonkurranseDommer(KonkurranseDommer konkurranseDommer);
     }
 }

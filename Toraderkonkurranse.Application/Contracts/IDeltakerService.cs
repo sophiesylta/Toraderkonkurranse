@@ -11,8 +11,8 @@ namespace Toraderkonkurranse.Application.Contracts
     public interface IDeltakerService
     {
         public Boolean meldPaaDeltaker(int arrangementID, int konkurranseID, AddDeltakerDTO nyDeltakerDTO);
-        public void leggTilPersonIDeltaker(Person person, Deltaker deltaker);
-        public void opprettDeltakelse(int arrangementID, int konkurranseID, int deltakerID, Person person);
+        public void leggTilNyePersonerIDeltaker(Person person, Deltaker deltaker);
+        public void opprettDeltakelse(int arrangementID, int konkurranseID, int deltakerID, int personID);
         public List<GetArrangementDTO> getAlleArrangement();
         public List<Konkurranse> getKonkurranseIArrangement(int arrangementID);
     }

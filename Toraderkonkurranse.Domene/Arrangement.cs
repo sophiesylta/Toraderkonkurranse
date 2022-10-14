@@ -26,29 +26,5 @@ namespace Toraderkonkurranse.Domene
         public List<Deltakelse> deltakelseliste { get; set; }
         public Status status { get; set; }
 
-        public Boolean leggTilKonkurranse(Konkurranse konkurranse) 
-        {
-            //TODO: sjekk at plass til ny konkurranse
-            konkurranser.Add(konkurranse);
-            return true;
-        }
-        public Boolean meldPaaDetaker(Deltaker deltaker, int konkurranseID)
-        {
-            foreach (var person in deltaker.personer)
-            {
-                Deltakelse deltakelse = new Deltakelse()
-                {
-                    status = DeltakelseStatus.påmeldt,
-                    konkurranseID = konkurranseID,
-                    deltakerID = deltaker.deltakerID,
-                    personID = person.personID,
-                };
-                deltakelseliste.Add(deltakelse);
-            }
-            //TODO: sjekk at det er plass til deltakelse
-            //TODO: sjekk at deltakelse ikke finnes fra før
-
-            return true;
-        }
     }
 }

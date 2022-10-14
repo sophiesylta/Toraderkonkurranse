@@ -11,68 +11,7 @@ namespace Toraderkonkurranse.WebAPI.Controllers
     [Route("[controller]")]
     public class TestController : ControllerBase
     {
-        [HttpGet("OpprettArrangement")]
-        public void opprettArrangement([FromServices] ToraderkonkurranseContext toraderDbContext)
-        {
-            Konkurranse konk1 = new Konkurranse()
-            {
-                navn = "Grupper",
-                tidspunkt = DateTime.Now.AddDays(2),
-                maxAntallDeltakere = 15,
-            };
-
-            Konkurranse konk2 = new Konkurranse()
-            {
-                navn = "Solist",
-                tidspunkt = DateTime.Now.AddDays(1),
-                maxAntallDeltakere = 1
-            };
-
-            Arrangement arr = new Arrangement()
-            {
-                status = Status.planlagt,
-                arrangor = "Osterøybelgen",
-                lokasjon = "Osterøy",
-                navn = "Vestlandsmesterskap 2022",
-            };
-
-            arr.leggTilKonkurranse(konk1);
-            arr.leggTilKonkurranse(konk2);
-
-            Person dommer1 = new Person()
-            {
-                fornavn = "Dommer1",
-                erDommer = true,
-            };
-            toraderDbContext.Personer.Add(dommer1);
-
-            Person dommer2 = new Person()
-            {
-                fornavn = "Dommer2",
-                erDommer = true
-            };
-            toraderDbContext.Arrangement.Add(arr);
-            toraderDbContext.Personer.Add(dommer2);
-            toraderDbContext.SaveChanges();
-
-            foreach (var konkurranse in arr.konkurranseliste)
-            {
-                KonkurranseDommer konkurranseDommer1 = new KonkurranseDommer()
-                {
-                    personID = dommer1.personID,
-                    konkurranseID = konkurranse.konkurranseID
-                };
-                toraderDbContext.KonkurranseDommer.Add(konkurranseDommer1);
-                KonkurranseDommer konkurranseDommer2 = new KonkurranseDommer()
-                {
-                    personID = dommer2.personID,
-                    konkurranseID = konkurranse.konkurranseID
-                };
-                toraderDbContext.KonkurranseDommer.Add(konkurranseDommer2);
-            }
-            toraderDbContext.SaveChanges();
-        }
-
+        
         [HttpGet("meldPaaDeltaker")]
         public void opprettDeltaker([FromServices] ToraderkonkurranseContext toraderDbContext)
         {
@@ -101,14 +40,7 @@ namespace Toraderkonkurranse.WebAPI.Controllers
             toraderDbContext.SaveChanges();
         }
 
-        [HttpGet("paameldeDeltaker")]
-        public void paameldeDeltaker([FromServices] ToraderkonkurranseContext toraderDbContext,int arrangementID, int konkurranseID, int deltakerID)
-        {
-            var arrangement = toraderDbContext.Arrangement.Where(e => e.arrangementID == arrangementID).FirstOrDefault();
-            var deltaker = toraderDbContext.Deltakere.Where(e => e.deltakerID == deltakerID).Include(e => e.personer).FirstOrDefault();
-            arrangement.meldPaaDetaker(deltaker, konkurranseID);
-            toraderDbContext.SaveChanges();
-        }
+        
 
         [HttpGet("setScore")]
         public void setScore([FromServices] ToraderkonkurranseContext toraderDbContext, int konkurranseID, int deltakerID, int dommerPersonID) 

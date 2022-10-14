@@ -13,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IArrangementRepository, ArrangementRepository>();
 builder.Services.AddScoped<IDeltakerRepository, DeltakerRepository>();
 builder.Services.AddScoped<IDommerRepository, DommerRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IDommerService, DommerService>();
 builder.Services.AddScoped<IArrangementService, ArrangementService>();
 builder.Services.AddScoped<IDeltakerService, DeltakerService>();

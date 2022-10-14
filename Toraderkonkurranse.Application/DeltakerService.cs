@@ -10,41 +10,47 @@ namespace Toraderkonkurranse.Application
     {
         private readonly IArrangementService arrangementService;
         private readonly IDeltakerRepository deltakerRepository;
+        private readonly IPersonRepository personRepository;
 
-        public DeltakerService(IArrangementService arrangementService, IDeltakerRepository deltakerRepository)
+        public DeltakerService(IArrangementService arrangementService, IDeltakerRepository deltakerRepository, IPersonRepository personRepository)
         {
             this.arrangementService = arrangementService;
             this.deltakerRepository = deltakerRepository;
+            this.personRepository = personRepository;
         }
         public Boolean meldPaaDeltaker(int arrangementID, int konkurranseID, AddDeltakerDTO nyDeltakerDTO)
         {
-            Deltaker deltaker = deltakerRepository.GetDeltaker(nyDeltakerDTO.navn);
-            List<Person> personer = DtoTilPerson(nyDeltakerDTO.personer);
+            //TODO sjekk at konkurranse finnes i arrangement
 
-            //sjekk om deltaker eksisterer fra før, hvis ikke, opprett ny
-            if (deltaker == null)
-            {
-                deltaker = new Deltaker();
-                deltaker.personer = personer;
-                deltaker.navn = nyDeltakerDTO.navn;
-
-                opprettDeltaker(deltaker);
-            }
-            
             // kan ikke opprette deltaker i et arrangement som er aktivt, avsluttet eller avlyst
             if (arrangementService.getStatus(arrangementID) != Status.planlagt)
             {
                 return false;
             }
 
-            foreach (var person in personer)
+            Deltaker deltaker = deltakerRepository.GetDeltaker(nyDeltakerDTO.navn);
+            //TODO bruke mapper
+            List<Person> personer = DtoTilPerson(nyDeltakerDTO.personer);
+
+            //oppretter personer i listen som ikke finnes
+            personer = personer.Select(e=>leggTilPerson(e)).ToList();
+
+            //sjekk om deltaker eksisterer fra før, hvis ikke, opprett ny
+            if (deltaker == null)
+            {
+                deltaker = new Deltaker(nyDeltakerDTO.navn, personer);
+
+                opprettDeltaker(deltaker);
+            }
+            else 
             {
                 //Oppdaterer personer i deltaker
-                leggTilPersonIDeltaker(person, deltaker);
-                //Oppretter kun deltakelse på personer gitt i dette arrangementet/konkurransen
-                opprettDeltakelse(arrangementID, konkurranseID, deltaker.deltakerID, person);
+                personer.ForEach(person => leggTilNyePersonerIDeltaker(person, deltaker));
             }
-           
+            
+            //Oppretter kun deltakelse på personer gitt i dette arrangementet/konkurransen
+            personer.ForEach(person => opprettDeltakelse(arrangementID, konkurranseID, deltaker.deltakerID, person.personID));
+            
             return true;
         }
 
@@ -74,9 +80,9 @@ namespace Toraderkonkurranse.Application
         }
 
         //legger til personer i deltaker sin liste av personer
-        public void leggTilPersonIDeltaker(Person person, Deltaker deltaker) 
+        public void leggTilNyePersonerIDeltaker(Person person, Deltaker deltaker) 
         {
-            if (deltaker.personer.Contains(person))
+            if (deltaker.personer.Any(p=> p.epost.Equals(person.epost)))
             {
                 return;
             }
@@ -85,31 +91,24 @@ namespace Toraderkonkurranse.Application
 
         private Person leggTilPerson(Person person)
         {
-            Person p = deltakerRepository.GetPerson(person.epost);
+            Person p = personRepository.GetPerson(person.epost);
             if (p == null)
             {
-                deltakerRepository.LeggTilPerson(person);
+                personRepository.LeggTilPerson(person);
                 return person;
             }
             return p;
         }
 
         // Oppretter deltakelse på hver person i en deltaker
-        public void opprettDeltakelse(int arrangementID, int konkurranseID, int deltakerID, Person person) 
+        public void opprettDeltakelse(int arrangementID, int konkurranseID, int deltakerID, int personID) 
         {
-            List<Deltakelse> deltakelseList = deltakerRepository.GetDeltakelseIArrangement(arrangementID);
-
-            Deltakelse deltakelse = new Deltakelse()
-            {
-                deltakerID = deltakerID,
-                personID = person.personID,
-                konkurranseID = konkurranseID,
-            };
-
-            if (deltakelseList.Contains(deltakelse))
+            if (deltakerRepository.finnesDeltakelseIKonkurranse(konkurranseID, deltakerID, personID))
             {
                 return;
             }
+            Deltakelse deltakelse = new Deltakelse(deltakerID, konkurranseID, personID);
+
             //legge til deltakelsen i arrangementet sin liste av deltakelser
             arrangementService.leggTilDeltakelse(arrangementID, deltakelse);
 

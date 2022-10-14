@@ -2,6 +2,7 @@
 using Toraderkonkurranse.Application;
 using Toraderkonkurranse.Application.Contracts;
 using Toraderkonkurranse.Domene;
+using Toraderkonkurranse.DTO;
 using Toraderkonkurranse.Infrastructure.Persistence.Context;
 
 namespace Toraderkonkurranse.WebAPI.Controllers
@@ -25,6 +26,12 @@ namespace Toraderkonkurranse.WebAPI.Controllers
         public List<Deltaker> getDeltakerByKonkurranse(int konkurranseID)
         {
             return dommerService.getDeltakerByKonkurranse(konkurranseID);
+        }
+
+        [HttpPost("oprettDommer")]
+        public void opprettDommer(AddPersonDTO personDTO, int konkurranseID)
+        {
+            dommerService.opprettDommer(personDTO, konkurranseID);
         }
     }
 }

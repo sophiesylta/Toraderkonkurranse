@@ -31,5 +31,10 @@ namespace Toraderkonkurranse.Infrastructure.Persistence.Repository
 
             return deltakere;
         }
+        public void opprettKonkurranseDommer(KonkurranseDommer konkurranseDommer)
+        {
+            context.KonkurranseDommer.Add(konkurranseDommer);
+            context.SaveChanges();
+        }
     }
 }
