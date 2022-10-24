@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toraderkonkurranse.WebAPI",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toraderkonkurranse.Domene", "Toraderkonkurranse.Domene\Toraderkonkurranse.Domene.csproj", "{E2751F3E-E94C-46E1-AA0D-4F9A6E8D267A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toraderkonkurranse.Infrastructure.Persistence", "Toraderkonkurranse.Infrastructure.Persistence\Toraderkonkurranse.Infrastructure.Persistence.csproj", "{7E0BB283-7787-4241-B476-6C41F2E399B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toraderkonkurranse.Infrastructure.Persistence", "Toraderkonkurranse.Infrastructure.Persistence\Toraderkonkurranse.Infrastructure.Persistence.csproj", "{7E0BB283-7787-4241-B476-6C41F2E399B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toraderkonkurranse.Application", "Toraderkonkurranse.Application\Toraderkonkurranse.Application.csproj", "{AA6ADE73-4228-4224-959D-985C3BEF69B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toraderkonkurranse.Application", "Toraderkonkurranse.Application\Toraderkonkurranse.Application.csproj", "{AA6ADE73-4228-4224-959D-985C3BEF69B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toraderkonkurranse.DTO", "Toraderkonkurranse.DTO\Toraderkonkurranse.DTO.csproj", "{52C28A27-21AC-440A-A84E-55A5C9D4F3BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toraderkonkurranse.DTO", "Toraderkonkurranse.DTO\Toraderkonkurranse.DTO.csproj", "{52C28A27-21AC-440A-A84E-55A5C9D4F3BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toraderkonkurranse.AngularGUI", "Toraderkonkurranse.AngularGUI\Toraderkonkurranse.AngularGUI.csproj", "{AA3B86D5-16DA-4F04-9DE4-747AD80FE09F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{52C28A27-21AC-440A-A84E-55A5C9D4F3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52C28A27-21AC-440A-A84E-55A5C9D4F3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52C28A27-21AC-440A-A84E-55A5C9D4F3BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3B86D5-16DA-4F04-9DE4-747AD80FE09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3B86D5-16DA-4F04-9DE4-747AD80FE09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3B86D5-16DA-4F04-9DE4-747AD80FE09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3B86D5-16DA-4F04-9DE4-747AD80FE09F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

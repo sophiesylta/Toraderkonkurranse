@@ -36,5 +36,10 @@ namespace Toraderkonkurranse.Infrastructure.Persistence.Repository
             context.KonkurranseDommer.Add(konkurranseDommer);
             context.SaveChanges();
         }
+        public void setScore(Score score)
+        {
+            context.Score.Add(score);
+            context.SaveChanges();
+        }
     }
 }

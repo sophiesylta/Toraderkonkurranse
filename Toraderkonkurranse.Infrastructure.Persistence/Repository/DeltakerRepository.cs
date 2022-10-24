@@ -24,8 +24,7 @@ namespace Toraderkonkurranse.Infrastructure.Persistence.Repository
         public Deltaker GetDeltaker(string deltakerNavn)
         {
             return context.Deltakere.Where(e => e.navn.Equals(deltakerNavn)).Include(e=>e.personer).FirstOrDefault();
-        }
-       
+        }   
         public void LeggTilPersonIDeltaker(Person person, string deltakerNavn)
         {
             Deltaker deltaker = context.Deltakere.Where(e => e.navn.Equals(deltakerNavn)).FirstOrDefault();
@@ -45,17 +44,16 @@ namespace Toraderkonkurranse.Infrastructure.Persistence.Repository
         {
             return context.Arrangement.Where(e => e.arrangementID == arrangementID).SelectMany(e => e.deltakelseliste).ToList();
         }
-
         public void OpprettDeltaker(Deltaker deltaker)
         {
             context.Deltakere.Add(deltaker);
             context.SaveChanges();
         }
-
         public void OpprettDeltakelse(Deltakelse deltakelse)
         {
             context.Deltakelse.Add(deltakelse);
             context.SaveChanges();
         }
+        
     }
 }

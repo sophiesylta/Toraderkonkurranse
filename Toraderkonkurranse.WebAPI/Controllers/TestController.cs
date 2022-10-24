@@ -1,6 +1,8 @@
 ﻿using Bogus;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using Toraderkonkurranse.Application.Contracts;
 using Toraderkonkurranse.Domene;
 using Toraderkonkurranse.Infrastructure.Persistence.Context;
 using Person = Toraderkonkurranse.Domene.Person;
@@ -86,5 +88,35 @@ namespace Toraderkonkurranse.WebAPI.Controllers
             toraderDbContext?.Database.EnsureCreated();
         }
 
+        [HttpGet("getAlleResultaterPerDeltaker")]
+        public string getAlleResultatPerDeltaker([FromServices] ToraderkonkurranseContext context, int deltakerID)
+        {
+            var deltakerNavn = context.Deltakere.Where(e => e.deltakerID == deltakerID).Select(e => e.navn);
+            // alle deltakelser per deltaker
+            var konkArrListe = context.Deltakelse
+                .Where(e => e.deltakerID == deltakerID)
+                .Include(e => e.arrangement)
+                .Select(e =>
+                new
+                {
+                    konkurranseID = e.konkurranseID,
+                    konkurranseNavn = context.Konkurranser.Where(e2 => e2.konkurranseID == e.konkurranseID).FirstOrDefault().navn,
+                    arrangementNavn = e.arrangement.navn,
+                }).Distinct().ToList();
+
+
+            var resultatString = konkArrListe
+                .Select(e => new
+                {
+                    arrangementNavn = e.arrangementNavn,
+                    konkurranse = new
+                    {
+                        e.konkurranseNavn,
+                        score = context.Score.Where(e2 => e2.konkurranseID == e.konkurranseID && e2.deltakerID == deltakerID).ToList().Select(s => s.getSamletScore()).Sum()
+                    }
+                }).ToList();
+
+            return JsonSerializer.Serialize(resultatString);
+        }
     }
 }

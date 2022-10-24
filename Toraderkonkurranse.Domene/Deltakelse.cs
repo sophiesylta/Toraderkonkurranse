@@ -22,6 +22,7 @@ namespace Toraderkonkurranse.Domene
         public int konkurranseID { get; init; }
         public int personID { get; init; }
         public DeltakelseStatus status { get; set; }
+        public Arrangement arrangement { get; init; }
 
     }
 }

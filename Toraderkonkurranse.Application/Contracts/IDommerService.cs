@@ -13,5 +13,6 @@ namespace Toraderkonkurranse.Application.Contracts
         public List<Konkurranse> getKonkurranseByDommer(int dommerPersonID);
         public List<Deltaker> getDeltakerByKonkurranse(int konkurranseID);
         public void opprettDommer(AddPersonDTO personDTO, int konkurranseID);
+        public void setScore(int konkurranseID, int deltakerID, int dommerPersonID, int arrangementScore, int formidlingScore, int taktScore, int teknikkScore);
     }
 }

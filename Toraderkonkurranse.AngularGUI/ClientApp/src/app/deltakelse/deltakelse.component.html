@@ -1,0 +1,26 @@
+<h1 id="tableLabel">Arrangement</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!arrangement"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="arrangement">
+  <thead>
+    <tr>
+      <th>ArrangementID</th>
+      <th>Arrangør</th>
+      <th>Navn</th>
+      <th>Lokasjon</th>
+      <th>Konkurranser</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of arrangement">
+      <td>{{ item.arrangementID }}</td>
+      <td>{{ item.arrangor }}</td>
+      <td>{{ item.navn }}</td>
+      <td>{{ item.lokasjon }}</td>
+      <td><a class="" [routerLink]="['/konkurranse', item.arrangementID]">Vis konkurranser</a></td>
+    </tr>
+  </tbody>
+</table>

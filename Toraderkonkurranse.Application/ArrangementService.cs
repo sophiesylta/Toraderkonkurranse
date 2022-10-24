@@ -36,16 +36,18 @@ namespace Toraderkonkurranse.Application
         public void avsluttArrangement(int arrID)
         {
             Arrangement arr = arrangementRepository.GetArrangement(arrID);
-            List<resultat> resultatliste = new();
+            //List<resultat> resultatliste = new();
 
             foreach (var konk in arr.konkurranseliste)
             {
+                List<resultat> resultatliste = new();
                 List<int> deltakelse = deltakerRepository.GetDeltakelseIKonkurranse(konk.konkurranseID).Select(e=>e.deltakerID).Distinct().ToList();
                 foreach (var deltakerID in deltakelse)
                 {
                     resultatliste.Add(samletScore(deltakerID, konk.konkurranseID));
                 }
                 resultatliste.OrderBy(e=>e.score);
+                //resultatlisten blir lagt til i alle konkurranser i arrangementet, selvom deltaker ikke er påmeldt
                 konk.resultatliste = JsonSerializer.Serialize(resultatliste); 
             }
             arrangementRepository.AvsluttArrangement(arrID);

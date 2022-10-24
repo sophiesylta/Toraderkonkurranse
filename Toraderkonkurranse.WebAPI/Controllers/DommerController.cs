@@ -33,5 +33,10 @@ namespace Toraderkonkurranse.WebAPI.Controllers
         {
             dommerService.opprettDommer(personDTO, konkurranseID);
         }
+        [HttpPost("setScore")]
+        public void setScore(int konkurranseID, int deltakerID, int dommerPersonID, int arrangementScore, int formidlingScore, int taktScore, int teknikkScore)
+        {
+            dommerService.setScore(konkurranseID, deltakerID, dommerPersonID, arrangementScore, formidlingScore, taktScore, teknikkScore);
+        }
     }
 }

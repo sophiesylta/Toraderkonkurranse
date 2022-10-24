@@ -123,5 +123,10 @@ namespace Toraderkonkurranse.Application
         {
             return arrangementService.getArrangement(arrangementID).konkurranseliste;
         }
+        //public List<resultat> getAlleResultatPerDeltaker(string deltakerNavn)
+        //{
+            
+        //}
+
     }
 }

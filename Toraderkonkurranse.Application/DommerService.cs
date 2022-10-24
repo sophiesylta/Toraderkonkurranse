@@ -28,6 +28,7 @@ namespace Toraderkonkurranse.Application
         public void opprettDommer(AddPersonDTO personDTO, int konkurranseID)
         {
             Person personDommer = personRepository.GetPerson(personDTO.epost);
+            
             if (personDommer == null)
             {
                 personDommer = mapper.Map<Person>(personDTO);
@@ -52,6 +53,20 @@ namespace Toraderkonkurranse.Application
         public List<Deltaker> getDeltakerByKonkurranse(int konkurranseID)
         {
             return dommerRepository.getDeltakerByKonkurranse(konkurranseID);
+        }
+        public void setScore(int konkurranseID, int deltakerID, int dommerPersonID, int arrangementScore, int formidlingScore, int taktScore, int teknikkScore)
+        {
+            Score score = new Score()
+            {
+                konkurranseID = konkurranseID,
+                deltakerID = deltakerID,
+                konkurranseDommerID = dommerPersonID,
+                arrangementScore = arrangementScore,
+                formidlingScore = formidlingScore,
+                taktScore = taktScore,
+                teknikkScore = teknikkScore
+            };
+            dommerRepository.setScore(score);
         }
 
     }

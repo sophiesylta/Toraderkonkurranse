@@ -31,7 +31,7 @@ namespace Toraderkonkurranse.WebAPI.Controllers
         }
 
         [HttpGet("getAlleArrangement")]
-        public List<GetArrangementDTO> getAlleArrangement()
+        public IEnumerable<GetArrangementDTO> getAlleArrangement()
         {
             return deltakerService.getAlleArrangement();
         }
