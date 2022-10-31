@@ -16,12 +16,15 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: 'installerer nuget'
 
 - task: NuGetCommand@2
+  displayName: 'installerer nuget-pakker'
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: 'kompilerer løsning'
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
@@ -29,11 +32,13 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
+  displayName: 'Kjøre enhetstester'
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
 - task: AzureRmWebAppDeployment@4
+  displayName: 'Deploye til azure'
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'FHI-NyeDialog-Dev(1)(2f391a3e-e2c2-41e4-a30a-cf6d39da675c)'
