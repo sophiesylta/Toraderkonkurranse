@@ -32,3 +32,12 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'FHI-NyeDialog-Dev(1)(2f391a3e-e2c2-41e4-a30a-cf6d39da675c)'
+    appType: 'webApp'
+    WebAppName: 'toraderkonkurranse-api'
+    VirtualApplication: 'toraderkonkurranse-api'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/Toraderkonkurranse.WebAPI'
