@@ -25,9 +25,9 @@ namespace Toraderkonkurranse.WebAPI.Controllers
         }
 
         [HttpPost("meldPaaDeltaker")]
-        public void meldPaaDeltaker(int arrangementID, int konkurranseID, AddDeltakerDTO deltakerDTO)
+        public void meldPaaDeltaker(AddDeltakerDTO deltakerDTO)
         {
-            deltakerService.meldPaaDeltaker(arrangementID, konkurranseID, deltakerDTO);
+            deltakerService.meldPaaDeltaker(deltakerDTO.arrangementID, deltakerDTO.konkurranseID, deltakerDTO);
         }
 
         [HttpGet("getAlleArrangement")]

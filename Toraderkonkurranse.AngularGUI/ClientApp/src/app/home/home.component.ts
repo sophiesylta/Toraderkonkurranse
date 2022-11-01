@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  //path: string = "assets/Images/IMG-0157.jpg";
 }

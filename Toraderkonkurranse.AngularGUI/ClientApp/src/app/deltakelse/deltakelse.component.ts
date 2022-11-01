@@ -14,11 +14,28 @@ export class DeltakelseComponent {
       this.arrangement = result;
     }, error => console.error(error));
   }
+  erPlanlagt(status: Status) {
+    if (status.includes('planlagt')) {
+      return true;
+    }
+    return false;
+  }
+
+
 }
 
 interface GetArrangement {
-    arrangementID: number,
-    arrangor: string,
-    navn: string,
-    lokasjon:string
+  arrangementID: number,
+  arrangor: string,
+  navn: string,
+  lokasjon: string,
+  status: Status
+}
+
+export enum Status
+{
+  planlagt = 'planlagt',
+  aktiv = 'aktiv',
+  avsluttet = 'avsluttet',
+  avlyst = 'avlyst'
 }

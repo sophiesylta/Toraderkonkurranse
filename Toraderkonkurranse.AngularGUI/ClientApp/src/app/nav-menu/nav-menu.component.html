@@ -3,7 +3,7 @@
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Toraderkonkurranse</a>
+      <a class="navbar-brand" [routerLink]="['/']">Den store toraderarrangement-oversikten</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -23,14 +23,14 @@
           <li class="nav-item"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+            <a class="nav-link text-dark" [routerLink]="['/']">Hjem</a>
           </li>
           <!--routerlink: ser i app.module hvilke komponent som skal linkes til-->
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/deltakelse']">Arrangement</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/addDeltaker']">Deltaker</a>
+            <a class="nav-link text-dark" [routerLink]="['/dommer']">For dommere</a>
           </li>
         </ul>
       </div>

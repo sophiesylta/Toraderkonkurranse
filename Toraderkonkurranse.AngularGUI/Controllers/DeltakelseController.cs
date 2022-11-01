@@ -31,11 +31,11 @@ namespace Toraderkonkurranse.AngularGUI.Controllers
             //};
         }
         [HttpPost]
-        public async Task<Boolean> PostAsync(int arrangementID, int konkurranseID, AddDeltakerDTO deltaker)
+        public async Task<Boolean> PostAsync(AddDeltakerDTO deltaker)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7134/");
-            var result = await client.PostAsJsonAsync<AddDeltakerDTO>("Deltakelse/meldPaaDeltaker?arrangementID=1?konkurranseID=1" ,deltaker);
+            var result = await client.PostAsJsonAsync<AddDeltakerDTO>("Deltakelse/meldPaaDeltaker" ,deltaker);
             return true;
         }
     }

@@ -7,7 +7,9 @@ using Toraderkonkurranse.Infrastructure.Persistence.Context;
 
 namespace Toraderkonkurranse.WebAPI.Controllers
 {
-    public class DommerController
+    [ApiController]
+    [Route("[controller]")]
+    public class DommerController : ControllerBase
     {
         private readonly IDommerService dommerService;
         public DommerController(IDommerService dommerService)
@@ -28,10 +30,10 @@ namespace Toraderkonkurranse.WebAPI.Controllers
             return dommerService.getDeltakerByKonkurranse(konkurranseID);
         }
 
-        [HttpPost("oprettDommer")]
-        public void opprettDommer(AddPersonDTO personDTO, int konkurranseID)
+        [HttpPost("opprettDommer")]
+        public void opprettDommer(AddDommerDTO dommerDTO)
         {
-            dommerService.opprettDommer(personDTO, konkurranseID);
+            dommerService.opprettDommer(dommerDTO.person, dommerDTO.konkurranseID);
         }
         [HttpPost("setScore")]
         public void setScore(int konkurranseID, int deltakerID, int dommerPersonID, int arrangementScore, int formidlingScore, int taktScore, int teknikkScore)

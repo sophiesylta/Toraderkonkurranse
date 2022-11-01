@@ -9,6 +9,8 @@ namespace Toraderkonkurranse.DTO
 {
     public class AddDeltakerDTO
     {
+        public int arrangementID { get; set; }
+        public int konkurranseID { get; set; }
         public string navn { get; set; }
         public List<AddPersonDTO> personer { get; set; }
     }

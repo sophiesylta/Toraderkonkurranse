@@ -91,28 +91,28 @@ namespace Toraderkonkurranse.WebAPI.Controllers
         [HttpGet("getAlleResultaterPerDeltaker")]
         public string getAlleResultatPerDeltaker([FromServices] ToraderkonkurranseContext context, int deltakerID)
         {
-            var deltakerNavn = context.Deltakere.Where(e => e.deltakerID == deltakerID).Select(e => e.navn);
+            var deltakerNavn = context.Deltakere.Where(d => d.deltakerID == deltakerID).Select(d => d.navn).First();
             // alle deltakelser per deltaker
             var konkArrListe = context.Deltakelse
-                .Where(e => e.deltakerID == deltakerID)
-                .Include(e => e.arrangement)
-                .Select(e =>
+                .Where(deltagelse => deltagelse.deltakerID == deltakerID)
+                .Include(deltagelse => deltagelse.arrangement)
+                .Select(deltagelse =>
                 new
                 {
-                    konkurranseID = e.konkurranseID,
-                    konkurranseNavn = context.Konkurranser.Where(e2 => e2.konkurranseID == e.konkurranseID).FirstOrDefault().navn,
-                    arrangementNavn = e.arrangement.navn,
+                    konkurranseID = deltagelse.konkurranseID,
+                    konkurranseNavn = context.Konkurranser.Where(konk => konk.konkurranseID == deltagelse.konkurranseID).FirstOrDefault().navn,
+                    arrangementNavn = deltagelse.arrangement.navn,
                 }).Distinct().ToList();
 
 
             var resultatString = konkArrListe
-                .Select(e => new
+                .Select(konk => new
                 {
-                    arrangementNavn = e.arrangementNavn,
+                    arrangementNavn = konk.arrangementNavn,
                     konkurranse = new
                     {
-                        e.konkurranseNavn,
-                        score = context.Score.Where(e2 => e2.konkurranseID == e.konkurranseID && e2.deltakerID == deltakerID).ToList().Select(s => s.getSamletScore()).Sum()
+                        konk.konkurranseNavn,
+                        score = context.Score.Where(score => score.konkurranseID == konk.konkurranseID && score.deltakerID == deltakerID).ToList().Select(score => score.getSamletScore()).Sum()
                     }
                 }).ToList();
 

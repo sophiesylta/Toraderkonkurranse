@@ -22,9 +22,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\arrangement\arrangement.component.ts" />
     <None Remove="ClientApp\src\app\deltakelse\addDeltaker\addDeltaker.component.ts" />
     <None Remove="ClientApp\src\app\deltakelse\deltakelse.component.ts" />
     <None Remove="ClientApp\src\app\deltakelse\konkurranse\konkurranse.component.ts" />
+    <None Remove="ClientApp\src\app\deltakelse\resultat\resultat.component.ts" />
+    <None Remove="ClientApp\src\app\dommer\dommer.component.ts" />
+    <None Remove="ClientApp\src\assets\IMG-0157.JPG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\src\assets\IMG-0157.JPG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,11 +42,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\arrangement\arrangement.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\deltakelse\addDeltaker\addDeltaker.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\deltakelse\deltakelse.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\deltakelse\konkurranse\konkurranse.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\deltakelse\resultat\resultat.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\dommer\dommer.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

@@ -1,23 +1,45 @@
+<h1>Påmelding: {{konkurranseNavn}} ({{arrangementNavn}})</h1>
 <br />
 <br />
 Deltakernavn
 <br />
-<input type="text" [(ngModel)]="deltaker.navn" />
+<input type="text" [(ngModel)]="nyDeltaker.navn" />
 <br />
 <br />
 Fornavnavn
 <br />
-<input type="text" [(ngModel)]="deltaker.personer.fornavn" />
+<input type="text" [(ngModel)]="person.fornavn" />
 <br />
 <br />
 Etternavn
 <br />
-<input type="text" [(ngModel)]="deltaker.personer.etternavn" />
+<input type="text" [(ngModel)]="person.etternavn" />
 <br />
 <br />
 Epost
 <br />
-<input type="text" [(ngModel)]="deltaker.personer.epost" />
+<input type="text" [(ngModel)]="person.epost" />
+<br />
+<br />
+<button (click)="addPerson()">Legg til person</button>
 <br />
 <br />
 <button (click)="addDeltaker()">Meld på deltaker</button>
+<br />
+<br />
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="nyDeltaker.personer.length">
+  <thead>
+    <tr>
+      <th>Fornavn</th>
+      <th>Etternavn</th>
+      <th>Epost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of nyDeltaker.personer">
+      <td>{{ item.fornavn }}</td>
+      <td>{{ item.etternavn }}</td>
+      <td>{{ item.epost }}</td>
+    </tr>
+  </tbody>
+</table>

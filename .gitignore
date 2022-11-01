@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Toraderkonkurranse.AngularGUI/ClientApp/.angular/cache/13.3.4/angular-webpack/7fdd0ae3b71cf108085cffee21b9cfe04fe86473
+/Toraderkonkurranse.AngularGUI/ClientApp/.angular/cache/13.3.4/angular-webpack/9fbc623cc90f90fa8459348f51d75a4ca4429ddb

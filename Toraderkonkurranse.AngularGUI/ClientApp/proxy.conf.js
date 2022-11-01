@@ -7,10 +7,13 @@ const PROXY_CONFIG = [
   {
     context: [
       //skal stemme med baseUrl i component
+      // Skal stemme med controller-navn
       "/weatherforecast",
       "/deltakelse",
       "/konkurranse",
-      "/deltakelse/addDeltaker"
+      "/resultat",
+      "/dommer",
+      "/arrangement"
    ],
     target: target,
     secure: false,

@@ -12,6 +12,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { DeltakelseComponent } from './deltakelse/deltakelse.component';
 import { KonkurranseComponent } from './deltakelse/konkurranse/konkurranse.component';
 import { AddDeltakerComponent } from './deltakelse/addDeltaker/addDeltaker.component';
+import { ResultatComponent } from './deltakelse/resultat/resultat.component';
+import { DommerComponent } from './dommer/dommer.component';
+import { ArrangementComponent } from './arrangement/arrangement.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { AddDeltakerComponent } from './deltakelse/addDeltaker/addDeltaker.compo
     FetchDataComponent,
     DeltakelseComponent,
     KonkurranseComponent,
-    AddDeltakerComponent
+    AddDeltakerComponent,
+    ResultatComponent,
+    DommerComponent,
+    ArrangementComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,8 +40,11 @@ import { AddDeltakerComponent } from './deltakelse/addDeltaker/addDeltaker.compo
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'deltakelse', component: DeltakelseComponent },
       // path for nettleseren mellom sidene
-      { path: 'konkurranse/:id', component: KonkurranseComponent },
-      { path: 'addDeltaker', component: AddDeltakerComponent },
+      { path: 'konkurranse/:id/:navn/:status', component: KonkurranseComponent },
+      { path: 'addDeltaker/:arrangementID/:konkurranseID/:navn/:arrangementNavn', component: AddDeltakerComponent },
+      { path: 'resultat/:konkurranseID', component: ResultatComponent },
+      { path: 'dommer', component: DommerComponent },
+      { path: 'arrangement', component: ArrangementComponent }
     ])
   ],
   providers: [],

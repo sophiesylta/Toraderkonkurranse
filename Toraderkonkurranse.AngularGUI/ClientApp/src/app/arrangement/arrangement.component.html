@@ -1,0 +1,29 @@
+<h1>Opprett nytt arrangement</h1>
+<br />
+<br />
+Arrangør
+<br />
+<input type="text" [(ngModel)]="arrangement.arrangor" />
+<br />
+<br />
+Navn
+<br />
+<input type="text" [(ngModel)]="arrangement.navn" />
+<br />
+<br />
+Lokasjon
+<br />
+<input type="text" [(ngModel)]="arrangement.lokasjon" />
+<br />
+<br />
+Start-dato
+<br />
+<input type="text" [(ngModel)]="arrangement.startDato" />
+<br />
+<br />
+Slutt-dato
+<br />
+<input type="text" [(ngModel)]="arrangement.sluttDato" />
+<br />
+<br />
+<button (click)="opprettArrangement()">Lagre</button>

@@ -47,7 +47,8 @@ namespace Toraderkonkurranse.WebAPI.Controllers
         [HttpGet("getResultatliste")]
         public string getResultatliste(int konkurranseID)
         {
-            return arrangementService.getResultatliste(konkurranseID);
+            string resultat = arrangementService.getResultatliste(konkurranseID);
+            return resultat; //arrangementService.getResultatliste(konkurranseID);
         }
     }
 }
