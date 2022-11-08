@@ -13,6 +13,15 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  projectName: 'Toraderkonkurranse.WebAPI'
+  projectFolder: 'Toraderkonkurranse.WebAPI'
+  artifactName: 'Toraderkonkurranse.WebAPI'
+
+resources:
+  repositories:
+  - repository: FhiFellesDevOps
+    type: git
+    name: Fhi.Felles/Fhi.Felles.DevOps  
 
 steps:
 - task: NuGetToolInstaller@1
@@ -37,11 +46,18 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureRmWebAppDeployment@4
-  displayName: 'Deploye til azure'
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'FHI-NyeDialog-Dev(1)(2f391a3e-e2c2-41e4-a30a-cf6d39da675c)'
-    appType: 'webApp'
-    WebAppName: 'toraderkonkurranse-api'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/Toraderkonkurranse.WebAPI'
+# publish artifacts
+- template: BuildTemplates/publishArtifactTemplate_v1.yml@FhiFellesDevOps
+  parameters:
+    projectName: '$(projectName)'
+    projectFolder: '$(projectFolder)'
+    buildConfiguration: '$(buildConfiguration)'
+    artifactName: '$(artifactName)'
+#- task: AzureRmWebAppDeployment@4
+#  displayName: 'Deploye til azure'
+#  inputs:
+#    ConnectionType: 'AzureRM'
+#    azureSubscription: 'FHI-NyeDialog-Dev(1)(2f391a3e-e2c2-41e4-a30a-cf6d39da675c)'
+#    appType: 'webApp'
+#    WebAppName: 'toraderkonkurranse-api'
+#    packageForLinux: '$(System.DefaultWorkingDirectory)/Toraderkonkurranse.WebAPI'
