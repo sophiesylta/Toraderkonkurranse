@@ -61,3 +61,13 @@ steps:
 #    appType: 'webApp'
 #    WebAppName: 'toraderkonkurranse-api'
 #    packageForLinux: '$(System.DefaultWorkingDirectory)/Toraderkonkurranse.WebAPI'
+ 
+# deploy webapp to azure
+- template: BuildTemplates/deployWebAppToAzureTemplate_v1.yml@FhiFellesDevOps 
+  parameters:
+    azureSubscription: 'FHI-NyeDialog-Dev(1)(2f391a3e-e2c2-41e4-a30a-cf6d39da675c)'
+    appName: 'toraderkonkurranse-api'
+    artifactName: 'Toraderkonkurranse.WebAPI'
+    appType: 'webAppLinux'
+    startUpCommand: 'dotnet $(projectName).dll'
+    package: '$(Pipeline.Workspace)/$(artifactName)/$(projectName).zip'
