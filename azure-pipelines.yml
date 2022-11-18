@@ -52,7 +52,7 @@ steps:
     projectName: '$(projectName)'
     projectFolder: '$(projectFolder)'
     buildConfiguration: '$(buildConfiguration)'
-    artifactName: '$(artifactName)'
+    artifactName: 'Toraderkonkurranse.WebAPI'
 #- task: AzureRmWebAppDeployment@4
 #  displayName: 'Deploye til azure'
 #  inputs:
