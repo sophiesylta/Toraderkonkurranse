@@ -53,6 +53,20 @@ steps:
     projectFolder: '$(projectFolder)'
     buildConfiguration: '$(buildConfiguration)'
     artifactName: 'Toraderkonkurranse.WebAPI'
+
+- task: DownloadBuildArtifacts@1
+  inputs:
+    buildType: 'current'
+    downloadType: 'specific'
+    itemPattern: '**/*.zip'
+    downloadPath: '$(System.ArtifactsDirectory)'
+    
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: 'current'
+    itemPattern: '**/*.zip'
+    targetPath: '$(Pipeline.Workspace)'
+
 #- task: AzureRmWebAppDeployment@4
 #  displayName: 'Deploye til azure'
 #  inputs:
