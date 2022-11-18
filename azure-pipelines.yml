@@ -54,18 +54,22 @@ steps:
     buildConfiguration: '$(buildConfiguration)'
     artifactName: 'Toraderkonkurranse.WebAPI'
 
-- task: DownloadBuildArtifacts@1
-  inputs:
-    buildType: 'current'
-    downloadType: 'specific'
-    itemPattern: '**/*.zip'
-    downloadPath: '$(System.ArtifactsDirectory)'
-    
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
-    itemPattern: '**/*.zip'
+    itemPattern: '**/Toraderkonkurranse.WebAPI.zip'
     targetPath: '$(Pipeline.Workspace)'
+
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy web app'
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'FHI-NyeDialog-Dev (2f391a3e-e2c2-41e4-a30a-cf6d39da675c)'
+    appType: 'webApp'
+    WebAppName: 'toraderkonkurranse-api'
+    packageForLinux: '$(Pipeline.Workspace)/$(artifactName)/$(projectName).zip'
+    StartupCommand: 'dotnet $(projectName).dll'
+
 
 #- task: AzureRmWebAppDeployment@4
 #  displayName: 'Deploye til azure'
@@ -75,9 +79,6 @@ steps:
 #    appType: 'webApp'
 #    WebAppName: 'toraderkonkurranse-api'
 #    packageForLinux: '$(System.DefaultWorkingDirectory)/Toraderkonkurranse.WebAPI'
-- download: current
-  displayName: 'download artifact'
-  artifact: 'Toraderkonkurranse.WebAPI' 
   
 ## deploy webapp to azure
 #- template: BuildTemplates/deployWebAppToAzureTemplate_v1.yml@FhiFellesDevOps 
